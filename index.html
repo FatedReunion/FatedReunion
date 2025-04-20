@@ -5,17 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>我们终将重逢</title>
 
-    <link rel="stylesheet" href="css/default.css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jscex.min.js"></script>
-    <script src="js/jscex-parser.js"></script>
-    <script src="js/jscex-jit.js"></script>
-    <script src="js/jscex-builderbase.min.js"></script>
-    <script src="js/jscex-async.min.js"></script>
-    <script src="js/jscex-async-powerpack.min.js"></script>
-    <script src="js/functions.js" charset="utf-8"></script>
-    <script src="js/love.js" charset="utf-8"></script>
-    <script src="js/stick-figure.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="css/default.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jscex.min.js"></script>
+    <script type="text/javascript" src="js/jscex-parser.js"></script>
+    <script type="text/javascript" src="js/jscex-jit.js"></script>
+    <script type="text/javascript" src="js/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="js/jscex-async.min.js"></script>
+    <script type="text/javascript" src="js/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="js/functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/love.js" charset="utf-8"></script>
+    <script src="js/stick-figure-animation.js"></script>
     <style type="text/css">
         .STYLE1 {
             color: #666666
@@ -60,6 +60,7 @@
         (function () {
             var canvas = $('#canvas');
 
+            const ctx = canvas[0].getContext('2d', { willReadFrequently: true });
             if (!canvas[0].getContext) {
                 $("#error").show();
                 return false;
@@ -70,7 +71,10 @@
 
             canvas.attr("width", width);
             canvas.attr("height", height);
-            var stickFigureController = new StickFigureController(canvas[0], width, height);
+            // var stickFigureController = new StickFigureController(canvas[0], width, height);
+            const targetX = width - 300;  // 将目标位置设为画布中心
+            const targetY = height - 200;
+            const animation = new StickFigureAnimation(ctx, targetX, targetY);
 
             var opts = {
                 seed: {
@@ -182,7 +186,7 @@
                     tree.ctx.clearRect(0, 0, width, height);
                     tree.jump();
                     foot.draw();
-                    stickFigureController.move();  // 确保在动画循环中调用
+                    // stickFigureController.move();  // 确保在动画循环中调用
                     $await(Jscex.Async.sleep(25));
                 }
             }));
@@ -210,6 +214,7 @@
                 $await(moveAnimate());
 
                 textAnimate().start();
+                animation.start();
 
                 $await(jumpAnimate());
             }));
