@@ -5,16 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>我们终将重逢</title>
 
-    <link type="text/css" rel="stylesheet" href="css/default.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jscex.min.js"></script>
-    <script type="text/javascript" src="js/jscex-parser.js"></script>
-    <script type="text/javascript" src="js/jscex-jit.js"></script>
-    <script type="text/javascript" src="js/jscex-builderbase.min.js"></script>
-    <script type="text/javascript" src="js/jscex-async.min.js"></script>
-    <script type="text/javascript" src="js/jscex-async-powerpack.min.js"></script>
-    <script type="text/javascript" src="js/functions.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/love.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/default.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jscex.min.js"></script>
+    <script src="js/jscex-parser.js"></script>
+    <script src="js/jscex-jit.js"></script>
+    <script src="js/jscex-builderbase.min.js"></script>
+    <script src="js/jscex-async.min.js"></script>
+    <script src="js/jscex-async-powerpack.min.js"></script>
+    <script src="js/functions.js" charset="utf-8"></script>
+    <script src="js/love.js" charset="utf-8"></script>
     <script src="js/stick-figure-animation.js"></script>
     <style type="text/css">
         .STYLE1 {
@@ -71,7 +71,6 @@
 
             canvas.attr("width", width);
             canvas.attr("height", height);
-            // var stickFigureController = new StickFigureController(canvas[0], width, height);
             const targetX = width - 300;  // 将目标位置设为画布中心
             const targetY = height - 200;
             const animation = new StickFigureAnimation(ctx, targetX, targetY);
@@ -186,7 +185,6 @@
                     tree.ctx.clearRect(0, 0, width, height);
                     tree.jump();
                     foot.draw();
-                    // stickFigureController.move();  // 确保在动画循环中调用
                     $await(Jscex.Async.sleep(25));
                 }
             }));
